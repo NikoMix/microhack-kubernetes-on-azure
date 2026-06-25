@@ -1,0 +1,14 @@
+# Code ownership for the Kubernetes on Azure Module B MicroHack.
+# Default owner.
+*                       @NikoMix
+
+# Workstream subtrees.
+/infra/                 @NikoMix
+/scripts/               @NikoMix
+/apps/                  @NikoMix
+/gitops/                @NikoMix
+/challenges/            @NikoMix
+/docs/                  @NikoMix
+/slides/                @NikoMix
+/trainer-guide/         @NikoMix
+/.github/               @NikoMix
