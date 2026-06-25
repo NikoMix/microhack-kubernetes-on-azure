@@ -1,0 +1,13 @@
+---
+# Flux source for the whole repo. Created by `flux bootstrap` in real clusters; pinned here
+# to the repo default branch so all Kustomizations reconcile from `main`.
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: flux-system
+  namespace: flux-system
+spec:
+  interval: 1m0s
+  ref:
+    branch: main
+  url: https://github.com/NikoMix/microhack-kubernetes-on-azure

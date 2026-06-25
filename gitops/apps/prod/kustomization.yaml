@@ -1,0 +1,8 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+# App-of-apps (prod): the namespace plus each service's prod overlay.
+resources:
+  - ../base
+  - ../../../apps/dotnet-api/k8s/overlays/prod
+  - ../../../apps/python-worker/k8s/overlays/prod
+  - ../../../apps/node-web/k8s/overlays/prod
