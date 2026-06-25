@@ -1,0 +1,164 @@
+name: iac
+
+on:
+  push:
+    branches: [main, nikomix-module-b-ttt-training]
+    paths:
+      - "infra/**"
+      - ".github/workflows/iac.yml"
+  pull_request:
+    paths:
+      - "infra/**"
+      - ".github/workflows/iac.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: iac-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  TERRAFORM_VERSION: "1.15.7"
+  TFLINT_VERSION: "v0.63.1"
+
+jobs:
+  bicep:
+    name: bicep build + lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Harden the runner
+        uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
+        with:
+          egress-policy: audit
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: Build and lint Bicep
+        run: |
+          set -euo pipefail
+          if [ ! -d infra/bicep ]; then
+            echo "infra/bicep not present yet — skipping."
+            exit 0
+          fi
+          az bicep install
+          shopt -s globstar nullglob
+          files=(infra/bicep/**/*.bicep)
+          if [ "${#files[@]}" -eq 0 ]; then
+            echo "No .bicep files found — skipping."
+            exit 0
+          fi
+          for f in "${files[@]}"; do
+            echo "::group::az bicep build ${f}"
+            az bicep build --file "${f}" --stdout > /dev/null
+            echo "::endgroup::"
+          done
+
+  terraform:
+    name: terraform fmt + validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Harden the runner
+        uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
+        with:
+          egress-policy: audit
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@dfe3c3f87815947d99a8997f908cb6525fc44e9e # v4.0.1
+        with:
+          terraform_version: ${{ env.TERRAFORM_VERSION }}
+          terraform_wrapper: false
+      - name: Format and validate
+        run: |
+          set -euo pipefail
+          if [ ! -d infra/terraform ]; then
+            echo "infra/terraform not present yet — skipping."
+            exit 0
+          fi
+          terraform -chdir=infra/terraform fmt -check -recursive
+          modules="$(find infra/terraform -type f -name '*.tf' -printf '%h\n' | sort -u)"
+          if [ -z "${modules}" ]; then
+            echo "No .tf files found — skipping validate."
+            exit 0
+          fi
+          while IFS= read -r d; do
+            echo "::group::validate ${d}"
+            terraform -chdir="${d}" init -backend=false -input=false -no-color
+            terraform -chdir="${d}" validate -no-color
+            echo "::endgroup::"
+          done <<< "${modules}"
+
+  tflint:
+    name: tflint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Harden the runner
+        uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
+        with:
+          egress-policy: audit
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: Set up tflint
+        uses: terraform-linters/setup-tflint@b480b8fcdaa6f2c577f8e4fa799e89e756bb7c93 # v6.2.2
+        with:
+          tflint_version: ${{ env.TFLINT_VERSION }}
+      - name: Run tflint
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if [ ! -d infra/terraform ]; then
+            echo "infra/terraform not present yet — skipping."
+            exit 0
+          fi
+          tflint --init
+          tflint --chdir=infra/terraform --recursive -f compact
+
+  checkov:
+    name: checkov
+    runs-on: ubuntu-latest
+    steps:
+      - name: Harden the runner
+        uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
+        with:
+          egress-policy: audit
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: "3.13"
+      - name: Install checkov
+        run: pip install --disable-pip-version-check "checkov==3.3.2"
+      - name: Run checkov
+        run: |
+          set -euo pipefail
+          if [ ! -d infra ]; then
+            echo "infra not present yet — skipping."
+            exit 0
+          fi
+          checkov -d infra --quiet --compact --download-external-modules false
+
+  psrule:
+    name: PSRule for Azure
+    runs-on: ubuntu-latest
+    # Best-effort governance signal: requires infra-owned ps-rule.yaml for Bicep
+    # expansion, so it reports without blocking until that config lands.
+    continue-on-error: true
+    steps:
+      - name: Harden the runner
+        uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
+        with:
+          egress-policy: audit
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: Run PSRule for Azure
+        shell: pwsh
+        run: |
+          if (-not (Test-Path 'infra')) {
+            Write-Host 'infra not present yet — skipping.'
+            exit 0
+          }
+          Install-Module PSRule.Rules.Azure -RequiredVersion 1.47.0 -Force -Scope CurrentUser -Repository PSGallery -AcceptLicense
+          Assert-PSRule -InputPath 'infra/' -Module 'PSRule.Rules.Azure' -Format File -OutputFormat NUnit3 -OutputPath 'psrule-results.xml' -ErrorAction Stop

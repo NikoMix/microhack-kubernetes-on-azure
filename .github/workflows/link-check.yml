@@ -1,0 +1,70 @@
+name: link-check
+
+on:
+  push:
+    branches: [main, nikomix-module-b-ttt-training]
+    paths:
+      - "**/*.md"
+      - ".github/workflows/link-check.yml"
+  pull_request:
+    paths:
+      - "**/*.md"
+      - ".github/workflows/link-check.yml"
+  schedule:
+    - cron: "41 5 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: link-check-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  offline:
+    name: relative links (offline)
+    if: github.event_name == 'pull_request' || github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Harden the runner
+        uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
+        with:
+          egress-policy: audit
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: Check relative links
+        uses: lycheeverse/lychee-action@8646ba30535128ac92d33dfc9133794bfdd9b411 # v2.8.0
+        with:
+          args: >-
+            --offline
+            --no-progress
+            --exclude '(\.\./)+(challenges|infra|gitops|scripts|apps|docs|slides|trainer-guide)/'
+            '.github/**/*.md'
+          fail: true
+          jobSummary: true
+
+  online:
+    name: external links (report only)
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Harden the runner
+        uses: step-security/harden-runner@9af89fc71515a100421586dfdb3dc9c984fbf411 # v2.19.4
+        with:
+          egress-policy: audit
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: Check external links
+        uses: lycheeverse/lychee-action@8646ba30535128ac92d33dfc9133794bfdd9b411 # v2.8.0
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          args: >-
+            --no-progress
+            --max-retries 2
+            --accept 200..=204,206,429
+            --exclude-mail
+            './**/*.md'
+          fail: false
+          jobSummary: true
