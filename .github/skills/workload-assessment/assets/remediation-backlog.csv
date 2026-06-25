@@ -1,0 +1,8 @@
+id,item,dimension,severity,effort,target_aks_feature,owner,acceptance_test,status
+1,Externalise secrets from appsettings to Key Vault,Secrets,Blocker,M,Key Vault + CSI Secret Store,,No secrets in image; pod reads via CSI volume,open
+2,Run container as non-root with read-only rootfs,Containerisation,Blocker,S,Pod securityContext + distroless base,,securityContext.runAsNonRoot true; image scan clean,open
+3,Remove local-disk session state,Statelessness,High,M,Stateless deployment + external cache,,Rolling restart keeps sessions; no PVC for state,open
+4,Adopt Microsoft Entra Workload Identity,Identity,High,M,Workload Identity federation,,App calls Azure with federated token; no static keys,open
+5,Emit OpenTelemetry to Azure Monitor (OTLP),Observability,Med,M,Container Insights + Managed Prometheus,,Traces/metrics/logs visible in Azure Monitor,open
+6,Define liveness/readiness probes and PDB,Resilience,High,S,Probes + PodDisruptionBudget,,Drain keeps min replicas; failed pod restarts,open
+7,Enumerate egress endpoints for Azure Firewall,Networking,Med,S,Azure Firewall egress rules,,All outbound FQDNs allow-listed; default deny,open
