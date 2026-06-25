@@ -1,0 +1,10 @@
+-c requirements.txt
+ruff
+mypy
+bandit
+pytest
+pytest-asyncio
+respx
+asgi-lifespan
+pip-tools
+pip-audit
