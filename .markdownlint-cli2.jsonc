@@ -1,0 +1,33 @@
+// markdownlint-cli2 configuration for the MicroHack repo.
+// Rules reference: https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md
+// Tuned so authored docs/templates lint cleanly while still enforcing structure.
+{
+  "config": {
+    "default": true,
+    // Line length is noisy for prose, tables, and links — disable.
+    "MD013": false,
+    // Templates use HTML entities and some inline HTML (e.g. <div align>) — allow.
+    "MD033": false,
+    // Files start with YAML frontmatter, so the first line is not always a heading.
+    "MD041": false,
+    // Allow duplicate headings when they are not siblings (e.g. repeated subsections).
+    "MD024": { "siblings_only": true },
+    // Ordered lists may use incremental numbering.
+    "MD029": { "style": "ordered" },
+    // Unordered list indentation of 2 spaces.
+    "MD007": { "indent": 2 },
+    // Require fenced code blocks (no indented code).
+    "MD046": { "style": "fenced" },
+    // Require a language on fenced code blocks.
+    "MD040": true
+  },
+  "globs": ["**/*.md"],
+  "ignores": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/.astro/**",
+    "**/.svelte-kit/**",
+    "**/CHANGELOG.md",
+    "**/LICENSE*.md"
+  ]
+}

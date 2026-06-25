@@ -1,0 +1,34 @@
+# gitleaks configuration for the MicroHack repo.
+# Docs: https://github.com/gitleaks/gitleaks#configuration
+# Extends the bundled default rules and adds a tight allowlist for training
+# content that contains placeholder (non-secret) values only.
+title = "gitleaks config — microhack-kubernetes-on-azure"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Allowlist placeholders used in training docs, templates, and samples."
+# Ignore generated lockfiles and binary-ish assets that produce false positives.
+paths = [
+  '''(.*?)package-lock\.json$''',
+  '''(.*?)pnpm-lock\.yaml$''',
+  '''(.*?)yarn\.lock$''',
+  '''(.*?)\.svg$''',
+]
+# Common non-secret tokens that appear in instructional content.
+regexes = [
+  '''223556219\+Copilot@users\.noreply\.github\.com''',
+  '''(?i)(example|placeholder|changeme|your-?(token|key|secret)|xxx+|<[^>]+>)''',
+  '''AI_PROVIDER''',
+  '''GITHUB_TOKEN''',
+  '''AZURE_(OPENAI|AI_FOUNDRY)_ENDPOINT''',
+]
+# Allow well-known stopwords to reduce entropy-based false positives.
+stopwords = [
+  "example",
+  "placeholder",
+  "redacted",
+  "sample",
+  "dummy",
+]
