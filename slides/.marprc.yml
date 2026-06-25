@@ -1,0 +1,7 @@
+# Marp CLI configuration — https://github.com/marp-team/marp-cli
+# Shared theme set lives in ./themes; decks opt in with `theme: microhack`.
+themeSet: ./themes
+# Disallow raw HTML in slide Markdown for safety; Marp directives and
+# `<!-- speaker notes -->` comments still work.
+html: false
+allowLocalFiles: false

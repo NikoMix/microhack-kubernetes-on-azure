@@ -1,0 +1,21 @@
+{
+  "name": "microhack-kubernetes-on-azure-slides",
+  "version": "1.0.0",
+  "description": "Marp classroom decks for the Kubernetes on Azure — Module B MicroHack.",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "build:html": "marp --config-file .marprc.yml --input-dir decks --output dist/html",
+    "build:pdf": "marp --config-file .marprc.yml --input-dir decks --pdf --allow-local-files --output dist/pdf",
+    "build": "npm run build:html",
+    "build:all": "npm run build:html && npm run build:pdf",
+    "watch": "marp --config-file .marprc.yml --input-dir decks --watch --output dist/html"
+  },
+  "devDependencies": {
+    "@marp-team/marp-cli": "^4.4.0"
+  }
+}
