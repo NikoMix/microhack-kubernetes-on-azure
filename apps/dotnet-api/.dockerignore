@@ -1,0 +1,32 @@
+# Build artifacts
+**/bin/
+**/obj/
+**/out/
+**/publish/
+
+# Tests are not needed in the runtime image
+tests/
+
+# IDE / tooling
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+
+# Local logs / scratch
+*.log
+**/run*.log
+
+# Git / CI
+.git/
+.gitignore
+.github/
+
+# Docs & k8s (not part of the image)
+README.md
+k8s/
+
+# OS cruft
+.DS_Store
+Thumbs.db
