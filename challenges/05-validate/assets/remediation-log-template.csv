@@ -1,0 +1,2 @@
+ID,Issue,Severity,Test,Fix,Status,Owner
+R-001,"<describe validation gap>","<Critical|High|Medium|Low>","<test id>","<planned fix>","<Open|In progress|Done|Accepted risk>","<owner>"
