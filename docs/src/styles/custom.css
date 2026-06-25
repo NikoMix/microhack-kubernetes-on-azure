@@ -1,0 +1,58 @@
+/* Kubernetes on Azure — Module B MicroHack · Starlight theme overrides.
+   Azure blue + Kubernetes blue accents on top of Starlight defaults. */
+
+:root {
+  /* Accent — Kubernetes blue (#326CE5) tuned for light theme contrast. */
+  --sl-color-accent-low: #d6e2fb;
+  --sl-color-accent: #2256c4;
+  --sl-color-accent-high: #16356f;
+
+  --microhack-azure: #0078d4;
+  --microhack-k8s: #326ce5;
+  --microhack-accent-gradient: linear-gradient(
+    90deg,
+    var(--microhack-azure),
+    var(--microhack-k8s)
+  );
+}
+
+:root[data-theme="dark"] {
+  --sl-color-accent-low: #122644;
+  --sl-color-accent: #5b8def;
+  --sl-color-accent-high: #cfe0fd;
+}
+
+/* Hero title gradient on the landing splash. */
+.hero h1,
+.hero .tagline {
+  background: none;
+}
+
+site-title,
+.site-title {
+  font-weight: 700;
+}
+
+/* Module / control pills used across the curriculum pages. */
+.control-badge {
+  display: inline-block;
+  padding: 0.1rem 0.55rem;
+  border-radius: 999px;
+  font-size: var(--sl-text-xs);
+  font-weight: 600;
+  line-height: 1.6;
+  color: #fff;
+  background: var(--microhack-accent-gradient);
+}
+
+/* Make Mermaid diagrams sit on a neutral card so both themes read well. */
+.mermaid {
+  display: flex;
+  justify-content: center;
+  margin: 1.25rem 0;
+}
+
+/* Tighten table density for the dense coverage / evidence matrices. */
+.sl-markdown-content table {
+  font-size: var(--sl-text-sm);
+}
