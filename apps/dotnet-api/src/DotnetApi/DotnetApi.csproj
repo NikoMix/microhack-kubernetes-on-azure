@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <AssemblyName>DotnetApi</AssemblyName>
+    <RootNamespace>DotnetApi</RootNamespace>
+    <UserSecretsId>dotnet-api-microhack</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- OpenAPI document generation (built-in for ASP.NET Core 10) + Scalar UI (MIT). -->
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.9" />
+    <PackageReference Include="Scalar.AspNetCore" Version="2.16.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- OpenTelemetry (traces + metrics + logs), modular & graceful. -->
+    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.16.0" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.16.0" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.16.0" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="1.15.1" />
+    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.16.0" />
+    <!-- Azure Monitor distro (used when APPLICATIONINSIGHTS_CONNECTION_STRING is set). -->
+    <PackageReference Include="Azure.Monitor.OpenTelemetry.AspNetCore" Version="1.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Modular AI inference providers. -->
+    <!-- Azure OpenAI (stable). -->
+    <PackageReference Include="Azure.AI.OpenAI" Version="2.1.0" />
+    <!-- Azure AI Foundry model inference + GitHub Models share this client.
+         No GA release exists yet; latest prerelease is used intentionally. -->
+    <PackageReference Include="Azure.AI.Inference" Version="1.0.0-beta.5" />
+  </ItemGroup>
+
+</Project>

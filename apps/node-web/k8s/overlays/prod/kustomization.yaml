@@ -1,0 +1,32 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: microhack-apps
+
+resources:
+  - ../../base
+  - ingress.yaml
+
+patches:
+  - path: deployment-replicas.yaml
+    target:
+      kind: Deployment
+      name: node-web
+  - path: hpa-patch.yaml
+    target:
+      kind: HorizontalPodAutoscaler
+      name: node-web
+
+configMapGenerator:
+  - name: node-web-config
+    behavior: merge
+    literals:
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://otel-collector.observability:4317
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+images:
+  - name: node-web
+    newName: node-web
+    newTag: stable

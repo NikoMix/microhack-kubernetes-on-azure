@@ -1,0 +1,44 @@
+{
+  "name": "node-web",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Node 24 + Fastify BFF / front door for the Kubernetes-on-Azure MicroHack. Calls dotnet-api and renders a server-side status page.",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/server.js",
+    "dev": "node --watch src/server.ts",
+    "lint": "eslint .",
+    "format:check": "prettier --check .",
+    "format": "prettier --write .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@azure/monitor-opentelemetry": "1.18.1",
+    "@opentelemetry/auto-instrumentations-node": "0.77.0",
+    "@opentelemetry/exporter-trace-otlp-grpc": "0.219.0",
+    "@opentelemetry/exporter-trace-otlp-proto": "0.219.0",
+    "@opentelemetry/resources": "2.8.0",
+    "@opentelemetry/sdk-node": "0.219.0",
+    "@opentelemetry/semantic-conventions": "1.41.1",
+    "fastify": "5.8.5"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@types/node": "26.0.1",
+    "eslint": "10.5.0",
+    "eslint-config-prettier": "10.1.8",
+    "prettier": "3.8.4",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.62.0",
+    "vitest": "3.2.6"
+  },
+  "overrides": {
+    "@opentelemetry/core": "2.8.0"
+  }
+}

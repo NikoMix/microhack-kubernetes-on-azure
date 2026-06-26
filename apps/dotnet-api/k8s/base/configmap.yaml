@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dotnet-api-config
+  labels:
+    app.kubernetes.io/name: dotnet-api
+    app.kubernetes.io/part-of: microhack-orders
+    app.kubernetes.io/component: api
+data:
+  # Non-secret runtime configuration. Secrets come from the Key Vault CSI Secret.
+  OTEL_SERVICE_NAME: "dotnet-api"
+  OTEL_EXPORTER_OTLP_PROTOCOL: "grpc"
+  # AI inference disabled by default (course standing rule). Override per-environment.
+  AI__Provider: "Disabled"

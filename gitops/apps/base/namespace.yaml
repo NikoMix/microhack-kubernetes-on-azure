@@ -1,0 +1,12 @@
+---
+# The single owner of the apps namespace (service overlays only set `namespace:`,
+# they do not declare the Namespace, to avoid duplicate-resource conflicts).
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: microhack-apps
+  labels:
+    app.kubernetes.io/part-of: microhack-orders
+    pod-security.kubernetes.io/enforce: restricted
+    pod-security.kubernetes.io/audit: restricted
+    pod-security.kubernetes.io/warn: restricted

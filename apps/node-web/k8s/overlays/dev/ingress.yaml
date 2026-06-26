@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: node-web
+  labels:
+    app.kubernetes.io/name: node-web
+    app.kubernetes.io/part-of: microhack-orders
+    app.kubernetes.io/component: web
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: node-web.dev.microhack.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: node-web
+                port:
+                  number: 80
