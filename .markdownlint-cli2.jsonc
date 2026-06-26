@@ -19,7 +19,12 @@
     // Require fenced code blocks (no indented code).
     "MD046": { "style": "fenced" },
     // Require a language on fenced code blocks.
-    "MD040": true
+    "MD040": true,
+    // MD060 (table column/pipe alignment) is a new, non-autofixable cosmetic rule.
+    // Empty-cell template tables across the repo are intentionally human-edited, so
+    // disable it globally (matches docs/.markdownlint-cli2.jsonc); all structural
+    // table rules remain enabled.
+    "MD060": false
   },
   "globs": ["**/*.md"],
   "ignores": [

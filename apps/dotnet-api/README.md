@@ -23,6 +23,7 @@ The container listens on `0.0.0.0:8080`.
 | `GET` | `/readyz` | Readiness (healthy once the repository is initialized). JSON. |
 
 ### Models
+
 `Order` (record): `Id` (Guid), `Customer`, `Sku`, `Quantity`, `Status` (`OrderStatus`),
 `CreatedAtUtc`, `UpdatedAtUtc`. DTOs: `CreateOrderRequest`, `UpdateStatusRequest`.
 Storage is an in-memory, thread-safe `ConcurrentDictionary` (`InMemoryOrderRepository`)
@@ -96,7 +97,7 @@ docker run --rm -p 8080:8080 dotnet-api:dev
 
 ## Kubernetes (Kustomize)
 
-```
+```text
 k8s/
 ├─ base/                      # deployment, service (ClusterIP 80→http:8080), serviceaccount,
 │                             # hpa (autoscaling/v2, CPU 70%), configmap, secretproviderclass

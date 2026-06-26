@@ -4,6 +4,7 @@ Declarative deployment of the polyglot workloads to AKS, demonstrating the **Git
 delivery model required for B.4.1 / B.5.2.
 
 ## Layout
+
 ```text
 gitops/
 ├── clusters/microhack/        # Flux Kustomizations + sources for the lab cluster
@@ -12,6 +13,7 @@ gitops/
 ```
 
 ## Conventions
+
 - App‑of‑apps pattern; environment promotion via overlays.
 - Pin chart/image versions; reconcile from the repo's `main`.
 - Manifests pass **kubeconform** + **kustomize build** in CI.
@@ -46,6 +48,16 @@ workloads last (`dependsOn` enforces ordering, `wait: true` blocks on health).
 
 The collector publishes the in-cluster OTLP endpoint the apps export to:
 `http://opentelemetry-collector.observability:4317`.
+
+> **Note — ingress-nginx lifecycle.** `4.15.1` is the final release of the community
+> `ingress-nginx` chart (the project was archived in March 2026). It is pinned here because
+> it is the latest published version, carries no known vulnerabilities, and is the most widely
+> understood ingress for teaching the GitOps delivery model. For production engagements, treat
+> the move to a **maintained, Azure-native ingress** as an explicit B.3.1 design decision: the
+> AKS **application routing add-on** (managed NGINX, `ingressType=managedNginx`) or
+> **Application Gateway for Containers** via the Gateway API (`ingressType=appGatewayForContainers`)
+> — both already provisioned by the `infra/` track. cert-manager and the OpenTelemetry Collector
+> are current upstream releases and are unaffected.
 
 ## Bootstrap
 

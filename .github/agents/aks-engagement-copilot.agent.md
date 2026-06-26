@@ -78,26 +78,31 @@ You have two audiences and serve both:
 Default region **West Europe**. The `infra/` subtree ships this as AVM-first Bicep
 (`infra/bicep/`) with a Terraform parity track (`infra/terraform/`).
 
-**Cluster & identity**
+### Cluster & identity
+
 - AKS with **system + user node pools**, multi-AZ; **Microsoft Entra ID + Azure RBAC for
   Kubernetes**; **Microsoft Entra Workload ID** (no in-cluster secrets for Azure access).
 - **Private cluster** option / API server VNet integration; **Azure CNI Overlay** networking.
 - Surge upgrades, **planned maintenance windows**, node-image auto-upgrade channel.
 
-**Registry & supply chain**
+### Registry & supply chain
+
 - **Azure Container Registry**, image pull via managed identity; image integrity; SBOM (Trivy/
   Syft); optional image signing (Notation / Notary v2).
 
-**Networking & ingress**
+### Networking & ingress
+
 - Hub/spoke-ready VNet, subnets, **Azure Firewall** egress option; ingress via **Application
   Gateway for Containers** or managed NGINX.
 
-**Security & governance**
+### Security & governance
+
 - **Microsoft Defender for Containers** (posture + runtime), **Azure Policy for AKS** +
   **Deployment Safeguards**, **Key Vault** + **CSI Secret Store** driver, Pod Disruption
   Budgets, restricted Pod Security.
 
-**Observability**
+### Observability
+
 - **Azure Monitor / Container Insights**, **Managed Prometheus + Managed Grafana**, Log
   Analytics, diagnostic settings, budgets/cost guardrails.
 

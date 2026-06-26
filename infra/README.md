@@ -3,10 +3,12 @@
 Infrastructure‑as‑Code for the MicroHack landing zone, kept in **parity** across two tracks.
 
 ## Tracks
+
 - [`bicep/`](bicep/) — Azure Verified Modules (Bicep) — primary lab track.
 - [`terraform/`](terraform/) — Azure Verified Modules (Terraform) — parity track.
 
 ## Target architecture (West Europe)
+
 AKS **secure baseline** suitable for teaching Module B (B.3.1 / B.4.1):
 
 - AKS cluster: system + user node pools, **Microsoft Entra ID + Azure RBAC**, **Workload
@@ -22,6 +24,7 @@ AKS **secure baseline** suitable for teaching Module B (B.3.1 / B.4.1):
 - Governance: Log Analytics, diagnostic settings, budgets/cost notes.
 
 ## Conventions
+
 - Parameterised for region (default `westeurope`), naming, and cost guardrails.
 - `main` deploys the full baseline; feature toggles for optional add‑ons.
 - Validated in CI: `az bicep build`, `terraform validate`, **PSRule for Azure**, **tflint**,

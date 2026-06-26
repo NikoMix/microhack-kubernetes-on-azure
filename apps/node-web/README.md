@@ -73,7 +73,7 @@ docker run --rm -p 8080:8080 node-web:dev
 
 ## Kubernetes (Kustomize)
 
-```
+```text
 k8s/
   base/        deployment, service (ClusterIP 80->8080 http), serviceaccount,
                hpa (CPU 70%), configmap, secretproviderclass, kustomization
@@ -99,7 +99,7 @@ kubectl kustomize k8s/overlays/prod
 
 ## Project layout
 
-```
+```text
 src/
   server.ts        Fastify app + listen (imports telemetry first)
   telemetry.ts     OTel / Azure Monitor bootstrap (import-time side effect)

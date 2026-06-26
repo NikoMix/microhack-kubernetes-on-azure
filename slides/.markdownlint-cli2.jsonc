@@ -1,0 +1,12 @@
+// markdownlint-cli2 overrides for Marp slide decks (slides/**).
+// Inherits the repo root config and only relaxes rules that conflict with the
+// Marp authoring model; all prose/structure rules stay enabled.
+{
+  "config": {
+    // Marp decks use one H1 per slide, so multiple top-level headings per file
+    // is expected (each slide is its own "document").
+    "MD025": false,
+    // Slides legitimately repeat heading text across decks/sections.
+    "MD024": false
+  }
+}

@@ -3,7 +3,7 @@
 
 # 🚀 Kubernetes on Azure — Module B MicroHack
 
-### A 1‑Day Classroom‑Led, Train‑the‑Trainer Course with Hands‑On Labs
+## A 1‑Day Classroom‑Led, Train‑the‑Trainer Course with Hands‑On Labs
 
 **Covers every Module B control of the _Kubernetes on Microsoft Azure Advanced Specialization_**
 **· powered by GitHub Copilot agents, Copilot skills & MCP servers · focused on Microsoft Azure**
@@ -33,7 +33,7 @@ guide** (timing, talking points, pitfalls), **trainer‑only solutions**, **slid
 
 ## 👥 Audience & prerequisites
 
-- **Who:** trainers/consultants who will *deliver* this course. Mixed Kubernetes experience —
+- **Who:** trainers/consultants who will _deliver_ this course. Mixed Kubernetes experience —
   primers and cheat sheets are included for the newer cohort.
 - **Bring:** an **Azure subscription (Owner)**, a **GitHub account** (Copilot enabled),
   and the [dev container / Codespaces](.devcontainer) toolchain (`az`, `kubectl`, `helm`,

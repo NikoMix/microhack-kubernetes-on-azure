@@ -10,6 +10,7 @@ operate**, exercising Module B end‑to‑end.
 | `node-web` | **Node 24** / Fastify | Web BFF / front door calling the API, server‑rendered status page |
 
 ## Requirements
+
 - **Distroless / Chiseled** multi‑stage Dockerfiles; non‑root; healthchecks.
 - **OpenTelemetry** traces/metrics/logs → Azure Monitor (OTLP).
 - Config via env + Key Vault CSI; **no secrets in images**.
@@ -17,6 +18,7 @@ operate**, exercising Module B end‑to‑end.
 - Latest dependencies, **zero known vulnerabilities**, permissive licenses only.
 
 ### Optional AI capability
+
 If any service adds an AI endpoint, it must use a **modular inference provider**
 abstraction supporting **Azure AI Foundry / Azure OpenAI / GitHub Models** (selectable via
 config), per the course standing rules.
