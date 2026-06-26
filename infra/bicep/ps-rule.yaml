@@ -1,0 +1,45 @@
+# =============================================================================
+#  PSRule for Azure — configuration for the Bicep secure baseline.
+#  CI (WS4) runs, e.g.:
+#    Assert-PSRule -Module PSRule.Rules.Azure -InputPath infra/bicep/ -Format File
+#  Docs: https://azure.github.io/PSRule.Rules.Azure/
+#
+#  Expansion is driven from the parameter file (main.bicepparam -> main.bicep),
+#  which is the supported entry point. Files under modules/ are NOT standalone-
+#  deployable (they require the composed `naming` object), so they are excluded
+#  from expansion here; they remain fully type-checked by `az bicep build`.
+# =============================================================================
+
+configuration:
+  # Expand from .bicepparam entry points (recommended). Standalone .bicep
+  # expansion is disabled so partial module fragments are not mis-treated as
+  # deployments.
+  AZURE_BICEP_FILE_EXPANSION: false
+  AZURE_BICEP_PARAMS_FILE_EXPANSION: true
+  AZURE_BICEP_FILE_EXPANSION_TIMEOUT: 120
+
+# Only the Azure rules module is in scope here.
+include:
+  module:
+    - PSRule.Rules.Azure
+
+# Compiled ARM JSON artifacts and notes are not analysed directly.
+input:
+  pathIgnore:
+    - '**/*.md'
+    - '**/*.json'
+    # Module fragments are composed by main.bicep; not deployable on their own.
+    - 'modules/**'
+
+output:
+  culture:
+    - 'en-US'
+
+# Baseline: secure-by-default Azure rules.
+binding:
+  preferTargetInfo: true
+
+rule:
+  # No rules are globally excluded. Use suppression groups for justified, scoped
+  # exceptions (added by CI owners if required) rather than disabling rules.
+  exclude: []

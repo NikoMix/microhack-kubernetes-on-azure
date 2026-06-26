@@ -1,0 +1,19 @@
+location     = "westeurope"
+environment  = "dev"
+workload_name = "mhaks"
+
+# Replace with Microsoft Entra group object IDs for cluster administrators.
+admin_group_object_ids = []
+
+# Replace with Microsoft Entra group object IDs that should receive Grafana Admin.
+grafana_admin_object_ids = []
+
+# Optional: restrict the public API server to trusted CIDR ranges.
+authorized_ip_ranges = []
+
+# Optional: add real notification recipients before enabling a budget resource.
+budget_alert_emails = []
+
+tags = {
+  Purpose = "MicroHack"
+}
