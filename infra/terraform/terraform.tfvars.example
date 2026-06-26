@@ -2,6 +2,14 @@ location     = "westeurope"
 environment  = "dev"
 workload_name = "mhaks"
 
+# --- Ingress ---
+# Lab default: "none". The Flux GitOps stack (gitops/) installs ingress-nginx
+# (ingressClass "nginx") as the single ingress controller, targeted by the sample
+# apps and cert-manager. "managedNginx" (AKS app-routing add-on) and
+# "appGatewayForContainers" remain B.3.1 design-area alternatives; if selected,
+# align the app Ingress ingressClassName + cert-manager solver class to match.
+ingress_type = "none"
+
 # Replace with Microsoft Entra group object IDs for cluster administrators.
 admin_group_object_ids = []
 

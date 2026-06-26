@@ -37,7 +37,12 @@ param adminGroupObjectIds = []
 param authorizedIpRanges = []
 
 // --- Ingress ---
-param ingressType = 'managedNginx'
+// Lab default: 'none'. The Flux GitOps stack (gitops/) installs ingress-nginx
+// (ingressClass 'nginx') as the single ingress controller, which the sample apps
+// and cert-manager target. 'managedNginx' (AKS app-routing add-on) and
+// 'appGatewayForContainers' remain B.3.1 design-area alternatives — if you select
+// one, align the app Ingress ingressClassName + cert-manager solver class to match.
+param ingressType = 'none'
 
 // --- Add-ons / security ---
 param enableWorkloadIdentity = true

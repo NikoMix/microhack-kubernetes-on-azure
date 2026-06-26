@@ -38,6 +38,7 @@ The following snake_case outputs are preserved for WS2/WS3/GitOps: `resource_gro
 
 ## Notes and assumptions
 
+- Ingress: the lab default is `ingress_type = "none"` — the Flux GitOps stack installs **ingress-nginx** (class `nginx`) as the single controller, which the apps and cert-manager target. `managedNginx` (app-routing add-on) and `appGatewayForContainers` remain B.3.1 design-area alternatives.
 - App Gateway for Containers is exposed as an `ingress_type` contract value; controller installation is expected at runtime through GitOps.
 - Defender here enables only the AKS cluster-level LAW-backed profile. The subscription-level Defender for Containers plan must be enabled separately.
 - Azure budgets require at least one notification target, so the budget resource is created only when `enable_budget = true` and `budget_alert_emails` is non-empty.

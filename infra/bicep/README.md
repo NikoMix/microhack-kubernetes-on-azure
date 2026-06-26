@@ -170,9 +170,14 @@ Prefer the cross-platform wrappers in [`../../scripts/`](../../scripts/) (`prefl
 - **Defender for Containers:** this template enables the **cluster-level** profile (backed by Log
   Analytics). The **subscription-level** Defender for Containers plan (pricing) must be enabled
   separately — it is intentionally out of scope to avoid a subscription-wide billing change.
-- **Ingress / App Gateway for Containers (ALB):** `ingressType` selects the contract. `managedNginx`
-  enables the AKS app-routing add-on in-cluster. `appGatewayForContainers` provisions the delegated
-  subnet only; the **ALB controller is installed at runtime via GitOps/Helm (WS3)**.
+- **Ingress / App Gateway for Containers (ALB):** `ingressType` selects the contract. The **lab
+  default is `none`** — the Flux GitOps stack (`gitops/`) installs **ingress-nginx** (ingressClass
+  `nginx`) as the single ingress controller, which the sample apps and cert-manager target. This
+  keeps one controller (one load balancer) and a clean GitOps-owns-ingress story. `managedNginx`
+  enables the AKS app-routing add-on in-cluster; `appGatewayForContainers` provisions the delegated
+  subnet only (the **ALB controller is installed at runtime via GitOps/Helm**). Both remain
+  available as **B.3.1 design-area alternatives** — selecting one means aligning the app
+  `ingressClassName` and the cert-manager solver class to match the chosen controller.
 - **Key Vault purge protection** is on, so `teardown` leaves a **soft-deleted** vault for the
   retention window; reusing the exact name within that window requires a purge.
 - **PSRule expansion limitation:** PSRule's in-memory ARM evaluator cannot mock the chained AVM

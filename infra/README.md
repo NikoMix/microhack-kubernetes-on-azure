@@ -12,8 +12,10 @@ AKS **secure baseline** suitable for teaching Module B (B.3.1 / B.4.1):
 - AKS cluster: system + user node pools, **Microsoft Entra ID + Azure RBAC**, **Workload
   Identity**, API server VNet integration / private option, **Azure CNI Overlay**.
 - **Azure Container Registry** with image pull via managed identity; image integrity.
-- Networking: hub/spoke‑ready VNet, subnets, **Azure Firewall** egress option, ingress via
-  **App Gateway for Containers** / managed NGINX.
+- Networking: hub/spoke‑ready VNet, subnets, **Azure Firewall** egress option. Ingress is
+  **GitOps‑owned by default** (`ingressType=none`; Flux installs **ingress‑nginx**, class `nginx`);
+  **managed NGINX** (app‑routing add‑on) and **App Gateway for Containers** are selectable B.3.1
+  design‑area alternatives.
 - Security: **Microsoft Defender for Containers**, **Azure Policy for AKS** + Deployment
   Safeguards, **Key Vault** + CSI Secret Store.
 - Observability: **Azure Monitor / Container Insights**, **Managed Prometheus + Grafana**.
