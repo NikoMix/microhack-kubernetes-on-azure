@@ -1,0 +1,13 @@
+ID,Finding,Category,Service,Risk(H/M/L),Effort(H/M/L),Priority,Remediation,Owner,Status
+M2-001,"Network policy does not explicitly restrict node-web egress to dotnet-api and platform endpoints",Network,node-web,H,M,P1,"Add namespace and egress NetworkPolicy allowing dotnet-api, DNS, Key Vault, and Azure Monitor only",Platform team,Proposed
+M2-002,"dotnet-api queue and state dependencies are not documented with retry and timeout expectations",Reliability,dotnet-api,H,L,P0,"Document queue/database endpoints, retries, timeouts, and failure modes in the dependency map",App team,Proposed
+M2-003,"Key Vault CSI usage needs verification for all sensitive settings",Secrets,all,H,L,P0,"Confirm SecretProviderClass mounts are used and remove any plain secret values from environment variables",Security team,Proposed
+M2-004,"Resource requests and limits are not evidenced for each container",Capacity,all,M,L,P2,"Set or verify CPU and memory requests/limits in Helm or Kustomize overlays",App team,Proposed
+M2-005,"Readiness and liveness probes are not captured in assessment evidence",Reliability,all,M,L,P2,"Record probe paths and thresholds; add missing probes before production rollout",App team,Proposed
+M2-006,"ACR image scanning and vulnerability gates are not linked to rollout readiness",Security,all,H,M,P1,"Enable or verify Defender for Containers image scanning and define a high/critical vulnerability gate",Security team,Proposed
+M2-007,"Queue dead-letter and replay plan is not documented",State,python-worker,H,M,P1,"Document queue retention, dead-letter handling, idempotency, and replay procedure",App team,Proposed
+M2-008,"SQL or state store backup and restore evidence is missing",State,dotnet-api,H,M,P1,"Confirm backup policy, point-in-time restore, and migration validation procedure",Data team,Proposed
+M2-009,"OpenTelemetry export is assumed but not validated end to end",Observability,all,M,L,P2,"Verify traces, metrics, and logs reach Azure Monitor with service.name per workload",Operations team,Proposed
+M2-010,"Workload identity bindings require least-privilege review",Identity,all,H,M,P1,"Review federated credentials, service account annotations, and Azure role assignments for each service",Platform team,Proposed
+M2-011,"Distroless or chiseled non-root runtime is documented but not evidenced in assessment",Security,all,M,L,P2,"Capture Dockerfile and pod security context evidence proving non-root immutable images",App team,Proposed
+M2-012,"Ingress dependency and upstream owner are not recorded",Ownership,node-web,M,L,P2,"Identify ingress route, upstream owner, TLS responsibility, and rollback contact",Platform team,Proposed
