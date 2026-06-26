@@ -1,0 +1,33 @@
+# =============================================================================
+#  Checkov — shared configuration for infrastructure (Bicep + Terraform).
+#  CI (WS4) runs:  checkov --config-file infra/.checkov.yaml
+#  Docs: https://www.checkov.io/2.Basics/CLI%20Command%20Reference.html
+# =============================================================================
+
+directory:
+  - infra/bicep
+  - infra/terraform
+
+framework:
+  - bicep
+  - terraform
+
+# Evaluate Terraform variables for higher-signal findings.
+evaluate-variables: true
+
+# Do not fetch remote AVM modules; analyse the IaC in this repository. The AVM
+# modules themselves are independently scanned and published by Microsoft.
+download-external-modules: false
+
+compact: true
+quiet: true
+
+# Justified, scoped exceptions only:
+#   CKV_TF_1 — AVM modules are pinned by explicit semantic version via the
+#   Terraform Registry / Bicep public registry (the supported, auditable
+#   mechanism for Azure Verified Modules) rather than a Git commit hash.
+skip-check:
+  - CKV_TF_1
+
+# Fail the build on any violation that is not explicitly skipped above.
+soft-fail: false
