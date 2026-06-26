@@ -1,0 +1,53 @@
+# Pre-commit hooks for local developer experience (mirrors CI lint gates).
+# Install: pipx install pre-commit && pre-commit install
+# Run all: pre-commit run --all-files
+# Docs: https://pre-commit.com
+---
+minimum_pre_commit_version: "3.5.0"
+default_install_hook_types: [pre-commit]
+fail_fast: false
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+      - id: check-yaml
+        args: [--allow-multiple-documents]
+        exclude: ^\.github/ISSUE_TEMPLATE/.*\.yml$
+      - id: check-json
+        exclude: ^\.vscode/.*\.json$|.*tsconfig.*\.json$|\.devcontainer/.*\.json$
+      - id: check-merge-conflict
+      - id: mixed-line-ending
+        args: [--fix=lf]
+
+  - repo: https://github.com/DavidAnson/markdownlint-cli2
+    rev: v0.22.1
+    hooks:
+      - id: markdownlint-cli2
+
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.38.0
+    hooks:
+      - id: yamllint
+        args: [--strict, -c, .yamllint]
+
+  - repo: https://github.com/rhysd/actionlint
+    rev: v1.7.12
+    hooks:
+      - id: actionlint
+
+  - repo: https://github.com/streetsidesoftware/cspell-cli
+    rev: v10.0.1
+    hooks:
+      - id: cspell
+        args: [--config, cspell.json, --no-progress, --no-summary]
+        files: \.(md|mdx)$
+
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.30.1
+    hooks:
+      - id: gitleaks
+        args: [--config, .gitleaks.toml]

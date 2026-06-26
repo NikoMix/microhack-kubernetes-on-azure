@@ -1,0 +1,37 @@
+# Normalise line endings across the polyglot repo (companion to .editorconfig).
+# Text files are stored with LF in git; binaries are left untouched.
+* text=auto eol=lf
+
+# Explicit text types (kept LF in the working tree on all platforms).
+*.md       text eol=lf
+*.markdown text eol=lf
+*.yml      text eol=lf
+*.yaml     text eol=lf
+*.json     text eol=lf
+*.jsonc    text eol=lf
+*.toml     text eol=lf
+*.cs       text eol=lf
+*.csproj   text eol=lf
+*.py       text eol=lf
+*.ts       text eol=lf
+*.js       text eol=lf
+*.sh       text eol=lf
+*.bicep    text eol=lf
+*.tf       text eol=lf
+
+# Windows scripts keep CRLF.
+*.ps1      text eol=crlf
+*.psm1     text eol=crlf
+*.cmd      text eol=crlf
+*.bat      text eol=crlf
+
+# Treat common binary assets as binary.
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.ico  binary
+*.pdf  binary
+*.woff binary
+*.woff2 binary
+*.zip  binary

@@ -1,0 +1,36 @@
+# yamllint configuration for the MicroHack repo.
+# Docs: https://yamllint.readthedocs.io/en/stable/configuration.html
+# Tuned for GitHub Actions workflows and issue forms.
+---
+extends: default
+
+yaml-files:
+  - "*.yaml"
+  - "*.yml"
+
+ignore: |
+  node_modules/
+  dist/
+  .astro/
+
+rules:
+  # Workflows do not start with a document marker.
+  document-start: disable
+  # `on:` and similar GitHub Actions keys would otherwise trip the truthy check.
+  truthy:
+    check-keys: false
+    allowed-values: ["true", "false"]
+  # Long lines are common in workflow expressions and issue-form placeholders.
+  line-length:
+    max: 160
+    level: warning
+  comments:
+    min-spaces-from-content: 1
+  comments-indentation: disable
+  indentation:
+    spaces: 2
+    indent-sequences: consistent
+  braces:
+    max-spaces-inside: 1
+  brackets:
+    max-spaces-inside: 1

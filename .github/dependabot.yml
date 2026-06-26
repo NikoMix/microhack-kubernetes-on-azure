@@ -1,0 +1,141 @@
+# Dependabot configuration — keeps dependencies current across the polyglot estate.
+# Docs: https://docs.github.com/code-security/dependabot/dependabot-version-updates
+# Ecosystems are scoped to the documented subtree layout. Directories that do not
+# yet exist simply produce a Dependabot log entry (not a CI failure).
+version: 2
+updates:
+  # GitHub Actions used by the workflows in this directory.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Europe/Berlin
+    open-pull-requests-limit: 10
+    labels:
+      - dependencies
+      - github-actions
+    commit-message:
+      prefix: "ci"
+    groups:
+      actions:
+        patterns:
+          - "*"
+
+  # .NET API (apps/dotnet-api).
+  - package-ecosystem: nuget
+    directory: /apps/dotnet-api
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Europe/Berlin
+    open-pull-requests-limit: 10
+    labels:
+      - dependencies
+      - dotnet
+    commit-message:
+      prefix: "build(deps)"
+    groups:
+      dotnet:
+        patterns:
+          - "*"
+
+  # Python worker (apps/python-worker).
+  - package-ecosystem: pip
+    directory: /apps/python-worker
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Europe/Berlin
+    open-pull-requests-limit: 10
+    labels:
+      - dependencies
+      - python
+    commit-message:
+      prefix: "build(deps)"
+    groups:
+      python:
+        patterns:
+          - "*"
+
+  # Node web frontend (apps/node-web).
+  - package-ecosystem: npm
+    directory: /apps/node-web
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Europe/Berlin
+    open-pull-requests-limit: 10
+    labels:
+      - dependencies
+      - node
+    commit-message:
+      prefix: "build(deps)"
+    groups:
+      node-web:
+        patterns:
+          - "*"
+
+  # Documentation site (docs/, Astro + Starlight).
+  - package-ecosystem: npm
+    directory: /docs
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Europe/Berlin
+    open-pull-requests-limit: 10
+    labels:
+      - dependencies
+      - docs
+    commit-message:
+      prefix: "build(deps)"
+    groups:
+      docs:
+        patterns:
+          - "*"
+
+  # Terraform IaC (infra/terraform).
+  - package-ecosystem: terraform
+    directory: /infra/terraform
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Europe/Berlin
+    open-pull-requests-limit: 10
+    labels:
+      - dependencies
+      - terraform
+    commit-message:
+      prefix: "build(deps)"
+    groups:
+      terraform:
+        patterns:
+          - "*"
+
+  # Container images (Dockerfiles across the apps).
+  - package-ecosystem: docker
+    directories:
+      - /apps/dotnet-api
+      - /apps/python-worker
+      - /apps/node-web
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Europe/Berlin
+    open-pull-requests-limit: 10
+    labels:
+      - dependencies
+      - docker
+    commit-message:
+      prefix: "build(deps)"
+    groups:
+      docker:
+        patterns:
+          - "*"
