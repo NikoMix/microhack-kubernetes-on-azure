@@ -15,7 +15,7 @@ resource "azurerm_resource_group" "this" {
 module "aks_identity" {
   #checkov:skip=CKV_TF_1:Terraform Registry AVM modules are pinned by explicit version per the MicroHack parity contract.
   source  = "Azure/avm-res-managedidentity-userassignedidentity/azurerm"
-  version = "0.5.0"
+  version = "0.5.3"
 
   name                = local.aks_identity_name
   location            = azurerm_resource_group.this.location

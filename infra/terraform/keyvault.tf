@@ -3,7 +3,7 @@ data "azurerm_client_config" "current" {}
 module "key_vault" {
   #checkov:skip=CKV_TF_1:Terraform Registry AVM modules are pinned by explicit version per the MicroHack parity contract.
   source  = "Azure/avm-res-keyvault-vault/azurerm"
-  version = "0.10.2"
+  version = "0.11.0"
 
   name                           = local.key_vault_name
   location                       = azurerm_resource_group.this.location

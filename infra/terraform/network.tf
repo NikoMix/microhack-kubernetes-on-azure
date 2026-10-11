@@ -1,7 +1,7 @@
 module "node_nsg" {
   #checkov:skip=CKV_TF_1:Terraform Registry AVM modules are pinned by explicit version per the MicroHack parity contract.
   source  = "Azure/avm-res-network-networksecuritygroup/azurerm"
-  version = "0.5.1"
+  version = "0.6.0"
 
   name                = "nsg-${local.node_subnet_name}"
   location            = azurerm_resource_group.this.location
@@ -14,7 +14,7 @@ module "node_nsg" {
 module "ingress_nsg" {
   #checkov:skip=CKV_TF_1:Terraform Registry AVM modules are pinned by explicit version per the MicroHack parity contract.
   source  = "Azure/avm-res-network-networksecuritygroup/azurerm"
-  version = "0.5.1"
+  version = "0.6.0"
 
   name                = "nsg-${local.ingress_subnet_name}"
   location            = azurerm_resource_group.this.location
@@ -52,7 +52,7 @@ module "ingress_nsg" {
 module "private_endpoint_nsg" {
   #checkov:skip=CKV_TF_1:Terraform Registry AVM modules are pinned by explicit version per the MicroHack parity contract.
   source  = "Azure/avm-res-network-networksecuritygroup/azurerm"
-  version = "0.5.1"
+  version = "0.6.0"
 
   name                = "nsg-${local.private_endpoint_subnet_name}"
   location            = azurerm_resource_group.this.location
@@ -144,7 +144,7 @@ locals {
 module "vnet" {
   #checkov:skip=CKV_TF_1:Terraform Registry AVM modules are pinned by explicit version per the MicroHack parity contract.
   source  = "Azure/avm-res-network-virtualnetwork/azurerm"
-  version = "0.19.0"
+  version = "0.22.2"
 
   name                = local.vnet_name
   location            = azurerm_resource_group.this.location
