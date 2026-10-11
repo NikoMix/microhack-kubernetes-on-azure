@@ -2,7 +2,7 @@
 module "aks" {
   #checkov:skip=CKV_TF_1:Terraform Registry AVM modules are pinned by explicit version per the MicroHack parity contract.
   source  = "Azure/avm-res-containerservice-managedcluster/azurerm"
-  version = "0.6.7"
+  version = "0.8.4"
 
   name                   = local.aks_name
   location               = azurerm_resource_group.this.location
