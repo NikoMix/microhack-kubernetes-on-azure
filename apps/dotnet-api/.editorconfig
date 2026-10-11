@@ -1,0 +1,25 @@
+# EditorConfig for apps/dotnet-api — inherits the repository root .editorconfig.
+# (Intentionally no `root = true` so repo-root settings still apply.)
+
+[*.cs]
+# File-scoped namespaces.
+csharp_style_namespace_declarations = file_scoped:error
+
+# `var` preferences.
+csharp_style_var_for_built_in_types = true:suggestion
+csharp_style_var_when_type_is_apparent = true:suggestion
+csharp_style_var_elsewhere = true:suggestion
+
+# using directives: sort System.* first and remove unused.
+dotnet_sort_system_directives_first = true
+dotnet_separate_import_directive_groups = false
+dotnet_diagnostic.IDE0005.severity = warning
+
+# Modern C# style preferences.
+csharp_prefer_braces = true:silent
+csharp_style_expression_bodied_methods = when_on_single_line:silent
+csharp_using_directive_placement = outside_namespace:error
+dotnet_style_namespace_match_folder = true:suggestion
+
+# Encourage file-scoped namespace + code-style enforcement.
+dotnet_diagnostic.IDE0161.severity = error

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: "Discussions"
+    url: "https://github.com/NikoMix/microhack-kubernetes-on-azure/discussions"
+    about: "Ask questions and discuss the MicroHack with the community."
+  - name: "Security policy"
+    url: "https://github.com/NikoMix/microhack-kubernetes-on-azure/security/policy"
+    about: "Report a security vulnerability privately via the security policy."

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-web
+  labels:
+    app.kubernetes.io/name: node-web
+    app.kubernetes.io/part-of: microhack-orders
+    app.kubernetes.io/component: web
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: node-web
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8080
+      protocol: TCP

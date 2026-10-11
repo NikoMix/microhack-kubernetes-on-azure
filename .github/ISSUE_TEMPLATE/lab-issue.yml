@@ -1,0 +1,67 @@
+name: "Lab issue"
+description: "Track a MicroHack module lab and its Module B audit control evidence."
+title: "[Lab] <module> — <short summary>"
+labels: ["lab"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form to track a single module lab. Tie the work to its Module B control and capture
+        evidence so the deliverable is audit-ready.
+  - type: dropdown
+    id: module
+    attributes:
+      label: "Module"
+      description: "Which MicroHack module does this lab belong to?"
+      options:
+        - "M0 — Setup"
+        - "M1 — Foundations"
+        - "M2 — Assessment"
+        - "M3 — Design"
+        - "M4 — Delivery"
+        - "M5 — Validate"
+        - "M6 — Operate"
+    validations:
+      required: true
+  - type: dropdown
+    id: control
+    attributes:
+      label: "Module B control"
+      description: "Which audit control does this lab map to?"
+      options:
+        - "B.1.1 — Certification & K8s foundations"
+        - "B.2.1 — Workload Assessment"
+        - "B.3.1 — Solution Design"
+        - "B.3.2 — Well-Architected Review"
+        - "B.4.1 — Delivery"
+        - "B.5.1 — Service Validation & Testing"
+        - "B.5.2 — Post-deployment Documentation"
+    validations:
+      required: true
+  - type: textarea
+    id: goal
+    attributes:
+      label: "Goal"
+      description: "What is the learner trying to accomplish in this lab?"
+      placeholder: "Produce a dependency map and prioritised remediation backlog for the in-scope workloads."
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: "Evidence / acceptance criteria"
+      description: "List the artifacts and acceptance criteria that prove the control is satisfied."
+      placeholder: "Dependency map, remediation backlog, links to the solutions folder."
+    validations:
+      required: true
+  - type: checkboxes
+    id: done
+    attributes:
+      label: "Definition of done"
+      options:
+        - label: "Deliverable produced and saved under the module solutions folder"
+          required: false
+        - label: "Evidence linked in this issue"
+          required: false
+        - label: "Validation / evidence checklist from the module prompt completed"
+          required: false

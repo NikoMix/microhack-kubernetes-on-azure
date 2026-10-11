@@ -1,0 +1,155 @@
+/* @theme microhack */
+
+/*
+ * MicroHack — Kubernetes on Azure (Module B) shared Marp theme.
+ * Extends the bundled `default` theme with an Azure + Kubernetes palette,
+ * a lead/title layout, section dividers, and footer/pagination styling.
+ * MIT-licensed; no external font or asset downloads at render time.
+ */
+
+@import "default";
+
+:root {
+  --mh-azure: #0078d4;
+  --mh-azure-dark: #004578;
+  --mh-k8s: #326ce5;
+  --mh-ink: #1b1f24;
+  --mh-muted: #5a6470;
+  --mh-bg: #ffffff;
+  --mh-bg-alt: #f3f7fd;
+  --mh-accent: #7b42bc;
+
+  font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial,
+    sans-serif;
+}
+
+section {
+  background-color: var(--mh-bg);
+  color: var(--mh-ink);
+  padding: 56px 64px;
+  font-size: 26px;
+  line-height: 1.45;
+}
+
+section h1,
+section h2,
+section h3 {
+  color: var(--mh-azure-dark);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+section h1 {
+  font-size: 1.7em;
+  border-bottom: 4px solid var(--mh-k8s);
+  padding-bottom: 0.2em;
+}
+
+section h2 {
+  font-size: 1.3em;
+}
+
+section a {
+  color: var(--mh-azure);
+}
+
+section strong {
+  color: var(--mh-azure-dark);
+}
+
+section code {
+  background: var(--mh-bg-alt);
+  border-radius: 4px;
+  padding: 0.05em 0.35em;
+  font-size: 0.85em;
+}
+
+section pre {
+  background: #0b1b2b;
+  border-radius: 8px;
+  font-size: 0.7em;
+}
+
+section blockquote {
+  border-left: 5px solid var(--mh-accent);
+  color: var(--mh-muted);
+  font-style: italic;
+}
+
+section table {
+  font-size: 0.78em;
+}
+
+section th {
+  background: var(--mh-azure);
+  color: #fff;
+}
+
+/* Pagination + footer */
+section::after {
+  color: var(--mh-muted);
+  font-size: 0.6em;
+}
+
+footer {
+  color: var(--mh-muted);
+  font-size: 0.55em;
+}
+
+/* Lead / title slides: <!-- _class: lead --> */
+section.lead {
+  background: linear-gradient(135deg, var(--mh-azure-dark), var(--mh-k8s));
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+}
+
+section.lead h1 {
+  color: #fff;
+  border-bottom: none;
+  font-size: 2.1em;
+}
+
+section.lead h2,
+section.lead h3 {
+  color: #d8e6fb;
+  font-weight: 500;
+}
+
+section.lead a,
+section.lead strong {
+  color: #fff;
+}
+
+section.lead code {
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+}
+
+/* Section divider: <!-- _class: divider --> */
+section.divider {
+  background: var(--mh-bg-alt);
+  border-left: 16px solid var(--mh-k8s);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+section.divider h1 {
+  border-bottom: none;
+  color: var(--mh-azure-dark);
+}
+
+/* Invert utility: <!-- _class: invert --> */
+section.invert {
+  background: var(--mh-ink);
+  color: #eef2f6;
+}
+
+section.invert h1,
+section.invert h2,
+section.invert h3 {
+  color: #8fb8f6;
+}

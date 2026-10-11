@@ -1,0 +1,32 @@
+name: "Content change"
+description: "Request a curriculum or content change (lab text, slide, or docs page)."
+title: "[Content] <short summary>"
+labels: ["content"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form to propose a change to course content. Be specific about the surface and the
+        rationale so reviewers can act quickly.
+  - type: dropdown
+    id: surface
+    attributes:
+      label: "Surface"
+      description: "Which content surface needs to change?"
+      options:
+        - "Challenge / lab README"
+        - "Facilitator guide"
+        - "Slides (Marp)"
+        - "Docs (Astro + Starlight)"
+        - "Trainer guide"
+        - "Prompt or skill"
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: "Change requested + rationale"
+      description: "Describe the change and why it improves the course."
+      placeholder: "Clarify the M2 dependency-map step; learners currently miss the egress mapping."
+    validations:
+      required: true

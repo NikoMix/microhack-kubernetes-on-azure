@@ -1,0 +1,66 @@
+---
+title: Kubernetes on Azure — Module B
+description: >-
+  A 1-day, Train-the-Trainer MicroHack covering every Module B control of the
+  Kubernetes on Microsoft Azure Advanced Specialization, powered by GitHub
+  Copilot agents, skills and MCP servers.
+template: splash
+hero:
+  tagline: >-
+    Take a mixed-skill cohort through the full AKS engagement lifecycle — assess,
+    design, deliver, validate and operate — mapped 1:1 to the seven Module B audit
+    controls, accelerated by the AKS Engagement Copilot.
+  actions:
+    - text: Start with the overview
+      link: /overview/
+      icon: right-arrow
+      variant: primary
+    - text: One-day agenda
+      link: /agenda/
+      icon: open-book
+      variant: minimal
+    - text: View on GitHub
+      link: https://github.com/NikoMix/microhack-kubernetes-on-azure
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid, LinkCard } from "@astrojs/starlight/components";
+
+## What this is
+
+This is the **published companion site** for a complete, ready-to-deliver MicroHack
+that teaches trainers how to run a 1-day, classroom-led course on **Kubernetes on
+Azure**. It mirrors the hands-on labs in
+[`challenges/`](https://github.com/NikoMix/microhack-kubernetes-on-azure/tree/main/challenges),
+the [`slides/`](https://github.com/NikoMix/microhack-kubernetes-on-azure/tree/main/slides),
+and the [`trainer-guide/`](https://github.com/NikoMix/microhack-kubernetes-on-azure/tree/main/trainer-guide).
+
+<CardGrid stagger>
+  <Card title="Mapped to Module B" icon="approve-check">
+    Every module ties to a Module B control of the **Kubernetes on Microsoft Azure
+    Advanced Specialization**, with a validation checklist that produces the
+    control's audit evidence.
+  </Card>
+  <Card title="Built for a mixed cohort" icon="open-book">
+    Primers, cheat sheets and a kubectl reference bring the newer-to-AKS cohort up
+    to speed without slowing the experienced learners.
+  </Card>
+  <Card title="Copilot + MCP throughout" icon="rocket">
+    A custom **AKS Engagement Copilot** agent, six Copilot skills, and three MCP
+    servers (Azure, GitHub, Microsoft Docs) accelerate each deliverable.
+  </Card>
+  <Card title="Train-the-Trainer" icon="setting">
+    Each module ships four synced artifacts: learner lab, facilitator guide,
+    trainer-only solutions, and slides — plus this docs page.
+  </Card>
+</CardGrid>
+
+## Jump in
+
+<CardGrid>
+  <LinkCard title="Course overview" href="/overview/" description="Audience, outcomes and how the pieces fit together." />
+  <LinkCard title="Module B coverage map" href="/coverage-map/" description="Controls → modules → evidence, at a glance." />
+  <LinkCard title="Modules M0–M6" href="/modules/m0-setup/" description="Start the lab walkthroughs from setup." />
+  <LinkCard title="Trainer resources" href="/trainer/facilitation/" description="Facilitation, scoring, troubleshooting and prep." />
+</CardGrid>

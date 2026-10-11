@@ -1,0 +1,61 @@
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# --- Node ---
+node_modules/
+npm-debug.log*
+pnpm-debug.log*
+yarn-error.log*
+dist/
+.astro/
+coverage/
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+*.egg-info/
+
+# --- .NET ---
+bin/
+obj/
+*.user
+TestResults/
+
+# --- Terraform ---
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+*.tfvars.local
+override.tf
+override.tf.json
+
+# --- Bicep / Azure ---
+*.azcli
+.azure/
+
+# --- Secrets / local ---
+*.local
+.env.*
+!.env.example
+kubeconfig
+*.pem
+*.key
+
+# --- Build / packaging ---
+*.tgz
+*.zip
+out/

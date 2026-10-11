@@ -1,0 +1,18 @@
+{
+  "editor.formatOnSave": true,
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "[markdown]": {
+    "files.trimTrailingWhitespace": false
+  },
+  "yaml.schemas": {
+    "https://json.schemastore.org/github-workflow.json": "/.github/workflows/*.{yml,yaml}",
+    "https://json.schemastore.org/dependabot-2.0.json": "/.github/dependabot.yml",
+    "https://json.schemastore.org/github-issue-forms.json": "/.github/ISSUE_TEMPLATE/*.yml"
+  },
+  "cSpell.import": ["./cspell.json"],
+  "markdownlint.configFile": ".markdownlint-cli2.jsonc",
+  "chat.mcp.discovery.enabled": true,
+  "github.copilot.chat.codeGeneration.useInstructionFiles": true
+}

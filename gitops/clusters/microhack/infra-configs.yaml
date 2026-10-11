@@ -1,0 +1,18 @@
+---
+# Stage 2: platform configuration that depends on the controllers' CRDs (e.g. ClusterIssuer).
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: infra-configs
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: infra-controllers
+  interval: 10m0s
+  retryInterval: 2m0s
+  timeout: 5m0s
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./gitops/infrastructure/configs
+  prune: true

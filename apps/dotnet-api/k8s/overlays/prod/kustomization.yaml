@@ -1,0 +1,49 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: microhack-apps
+
+resources:
+  - ../../base
+
+images:
+  - name: dotnet-api
+    newTag: stable
+
+patches:
+  - target:
+      kind: Deployment
+      name: dotnet-api
+    patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 2
+      - op: replace
+        path: /spec/template/spec/containers/0/resources/limits/cpu
+        value: "1"
+      - op: replace
+        path: /spec/template/spec/containers/0/resources/limits/memory
+        value: 512Mi
+      - op: replace
+        path: /spec/template/spec/containers/0/resources/requests/cpu
+        value: 100m
+      - op: replace
+        path: /spec/template/spec/containers/0/resources/requests/memory
+        value: 256Mi
+  - target:
+      kind: HorizontalPodAutoscaler
+      name: dotnet-api
+    patch: |-
+      - op: replace
+        path: /spec/minReplicas
+        value: 2
+      - op: replace
+        path: /spec/maxReplicas
+        value: 5
+  - target:
+      kind: ConfigMap
+      name: dotnet-api-config
+    patch: |-
+      - op: add
+        path: /data/OTEL_EXPORTER_OTLP_ENDPOINT
+        value: "http://opentelemetry-collector.observability:4317"
