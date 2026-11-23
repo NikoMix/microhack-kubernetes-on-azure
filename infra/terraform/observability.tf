@@ -1,7 +1,7 @@
 module "log_analytics" {
   #checkov:skip=CKV_TF_1:Terraform Registry AVM modules are pinned by explicit version per the MicroHack parity contract.
   source  = "Azure/avm-res-operationalinsights-workspace/azurerm"
-  version = "0.5.1"
+  version = "0.7.0"
 
   name                                                 = local.log_analytics_name
   location                                             = azurerm_resource_group.this.location
